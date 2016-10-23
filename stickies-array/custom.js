@@ -29,24 +29,25 @@
         var stickies = document.querySelector('.stickies'),
             sticky = document.createElement('li'),
             span = document.createElement('span');
-        span.setAttribute('class', 'sticky');
+        sticky.setAttribute('class', key);
         span.innerHTML = value;
         sticky.appendChild(span);
         stickies.appendChild(sticky);
+        sticky.addEventListener('click', deleteSticky)
     }
 
     // Create a new item
 
     var button = document.querySelector('.add');
-    button.addEventListener('click', function() {
+    button.addEventListener('click', function () {
         createSticky();
     });
 
     function createSticky() {
-    	var stickiesArray = getStickiesArray();
-    	var currentDate = new Date();
-    	var key = 'sticky_' + currentDate.getTime();
-       var value = document.querySelector('.note').value;
+        var stickiesArray = getStickiesArray();
+        var currentDate = new Date();
+        var key = 'sticky_' + currentDate.getTime();
+        var value = document.querySelector('.note').value;
         localStorage.setItem(key, value);
         stickiesArray.push(key);
         localStorage.setItem('stickiesArray', JSON.stringify(stickiesArray));
@@ -63,6 +64,26 @@
 
     function clearStorage() {
         localStorage.clear();
+    }
+
+    // Delete sticky item
+
+    function deleteSticky(e) {
+        var key = e.target.className;
+        if (e.target.tagName.toLowerCase() == 'span') {
+            key = e.target.parentNode.className;
+        }
+        localStorage.removeItem(key);
+        var stickiesArray = getStickiesArray();
+        if (stickiesArray) {
+            for (var i = 0; i < stickiesArray.length; i++) {
+                if (key == stickiesArray[i]) {
+                    stickiesArray.splice(i, 1)
+                }
+            }
+        }
+        localStorage.setItem('stickiesArray', JSON.stringify(stickiesArray));
+        location.reload();
     }
 
 })();
