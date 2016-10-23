@@ -43,9 +43,13 @@
     });
 
     function createSticky() {
-        var value = document.querySelector('.note').value;
-        var key = 'sticky_' + localStorage.length;
+    	var stickiesArray = getStickiesArray();
+    	var currentDate = new Date();
+    	var key = 'sticky_' + currentDate.getTime();
+       var value = document.querySelector('.note').value;
         localStorage.setItem(key, value);
+        stickiesArray.push(key);
+        localStorage.setItem('stickiesArray', JSON.stringify(stickiesArray));
         addSticky(value);
     }
 
