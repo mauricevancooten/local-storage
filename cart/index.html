@@ -8,23 +8,54 @@
 </head>
 
 <body>
-    <table class="cart">
-        <tr>
-            <th>Item</th>
-            <th>Price</th>
-        </tr>
-    </table>
-    <h1>Shop</h1>
-    <ul>
-        <li>
-            <img src="images/ultramarine.jpg" alt="ultramarine">
-            <br>
-            <span class="description">Ultramarine pigment</span>
-            <br>$ <span class="price">3.00</span>
-            <br>
-            <button class="add">Add to cart</button>
-        </li>
-    </ul>
+    <header>
+        <h1>Local Storage Cart</h1>
+    </header>
+    <div class="wrapper">
+        <div class="container">
+            <p>You currently have <span class="item-total">0</span> items in your cart.</p>
+            <h2>Products</h2>
+            <ul class="products">
+                <li>
+                    <img src="images/ultramarine.jpg" alt="ultramarine">
+                    <br>
+                    <span class="description">Ultramarine pigment</span>
+                    <br>$ <span class="price">3.00</span>
+                    <br>QTY <input class="qty" type="number" value="1">
+                    <br>
+                    <button class="add">Add to cart</button>
+                </li>
+                <li>
+                    <img src="images/oxide-green.jpg" alt="ultramarine">
+                    <br>
+                    <span class="description">Oxide green pigment</span>
+                    <br>$ <span class="price">4.00</span>
+                    <br>QTY <input class="qty" type="number" value="1">
+                    <br>
+                    <button class="add">Add to cart</button>
+                </li>
+                <li>
+                    <img src="images/burnt-sienna.jpg" alt="ultramarine">
+                    <br>
+                    <span class="description">Burnt Sienna pigment</span>
+                    <br>$ <span class="price">6.00</span>
+                    <br>QTY <input class="qty" type="number" value="1">
+                    <br>
+                    <button class="add">Add to cart</button>
+                </li>
+            </ul>
+            <h2>Cart</h2>
+            <table class="cart">
+                <tr>
+                    <th>Item</th>
+                    <th>Price</th>
+                    <th>QTY</th>
+                    <th>Total</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <footer></footer>
     <script src="custom.js"></script>
 </body>
 
