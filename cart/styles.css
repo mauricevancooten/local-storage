@@ -67,14 +67,25 @@ nav ul li a:hover {
 	margin-right:.5em;
 }
 
-table {
-	border:1px solid red;
+th, td {
+	padding:.5em 1em;
+  border:none;
+  text-align:center;
 }
 
-th {
-	border:1px solid green;
+td:first-child {
+  text-align:left;
 }
 
-tr {
-	border:1px solid orange;
+tr:first-child {
+	background:#eeeeee;
+}
+
+.basket {
+  max-width:600px;
+}
+
+.cart-contents {
+  text-align:right;
+  margin-right:205px;
 }

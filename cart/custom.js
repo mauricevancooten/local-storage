@@ -21,8 +21,6 @@
         addCartItems(value)
     }
 
-    // console.log(value)
-
     // Get item array
 
     function getItemArray() {
@@ -33,8 +31,6 @@
     }
 
     var itemArray = getItemArray();
-
-
 
     // Add cart items to DOM
 
@@ -50,7 +46,7 @@
         }
 
         var cart = document.querySelector('.cart');
-        var row = document.createElement('tr');  
+        var row = document.createElement('tr');
         var dataDesc = document.createElement('td');
         dataDesc.innerHTML = desc;
         var dataPrice = document.createElement('td');
@@ -60,9 +56,10 @@
         var deleteData = document.createElement('td');
         var deleteButton = document.createElement('button')
         deleteButton.setAttribute('class', key);
-				deleteData.appendChild(deleteButton).innerHTML = 'delete';
-				var subTotal = document.createElement('td');
-				subTotal.innerHTML = '$ ' + (price * quantity).toFixed(2);
+        deleteData.appendChild(deleteButton).innerHTML = 'delete';
+        var subTotal = document.createElement('td');
+        subTotal.classList.add('subtotal');
+        subTotal.innerHTML = '$ ' + (price * quantity).toFixed(2);
         row.appendChild(dataDesc);
         row.appendChild(dataPrice);
         row.appendChild(dataQuantity);
@@ -105,32 +102,41 @@
         });
     }
 
-    // var deleteButton = document.querySelector('table').querySelectorAll('button');
+    var deleteButton = document.querySelector('table').querySelectorAll('button');
 
-    // for (var i = 0; i < deleteButton.length; i++) {
-    // 	deleteButton[i].addEventListener('click', deleteItem)
-    // }
+    for (var i = 0; i < deleteButton.length; i++) {
+        deleteButton[i].addEventListener('click', deleteItem)
+    }
 
-    
+    // Delete items
 
-    // Delete item
+    function deleteItem(e) {
+        var key = e.target.className;
+        var cartArray = getCartArray();
+        if (cartArray) {
+            for (var i = 0; i < cartArray.length; i++) {
+                if (key == cartArray[i]) {
+                    cartArray.splice(i, 1)
+                }
+            }
+        }
+        localStorage.setItem('cartArray', JSON.stringify(cartArray));
+        location.reload();
+    }
 
-    // function deleteItem(e) {
-    //     var key = e.target.className;
-    //     if (e.target.tagName.toLowerCase() == 'span') {
-    //         key = e.target.parentNode.className;
-    //     }
-    //     localStorage.removeItem(key);
-    //     var cartArray = getCartArray();
-    //     if (cartArray) {
-    //         for (var i = 0; i < cartArray.length; i++) {
-    //             if (key == cartArray[i]) {
-    //                 cartArray.splice(i, 1)
-    //             }
-    //         }
-    //     }
-    //     localStorage.setItem('cartArray', JSON.stringify(cartArray));
-    //     location.reload();
-    // }
+    // Cart total
+
+    var subTotal = document.querySelectorAll('.subtotal');
+    var sum = 0;
+    for (var i = 0; i < subTotal.length; i++) {
+        sum += parseInt(subTotal[i].innerHTML.slice(2));
+    }
+    sum = sum.toFixed(2);
+
+    // Cart status
+
+    if (cartArray.length > 0) {
+            var cartContent = document.querySelector('.cart-contents').innerHTML = '<strong>Total:</strong> $' + sum;
+        }
 
 })();
