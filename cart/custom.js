@@ -2,7 +2,7 @@
 
 ;(function() { // IIFE
 
-    var cartArray, itemArray, key, value, item, desc, price, quantity, cart, row, dataDesc, dataPrice, dataQuantity, deleteData, deleteButton, subTotal, itemTotal, total, button, currentDate, description, sum
+    var cartArray, itemArray, key, value, item, desc, price, quantity, cart, row, dataDesc, dataPrice, dataQuantity, deleteData, deleteButton, subTotal, itemTotal, total, id, button, currentDate, description, sum
 
     // Create or return cart array
 
@@ -88,8 +88,8 @@
 
         button[i].addEventListener('click', function() {
             // Create unique id / timestamp for each product added.
-            currentDate = new Date()
-            key = 'item_' + currentDate.getTime()
+            id = this.parentElement.getAttribute('id')
+            key = 'item_' + id
             // Get value from DOM
             description = this.parentElement.querySelector('.description').innerHTML
             price = this.parentElement.querySelector('.price').innerHTML
