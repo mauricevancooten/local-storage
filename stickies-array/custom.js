@@ -2,9 +2,9 @@
 
 ;(function() { // IIFE
 
-    var stickiesArray, key, value, stickies, sticky, span, button, currentDate, clearButton
-
     // Stickies array
+
+    var stickiesArray = getStickiesArray();
 
     function getStickiesArray() {
         stickiesArray = localStorage['stickiesArray']
@@ -17,22 +17,20 @@
         return stickiesArray
     }
 
-    stickiesArray = getStickiesArray();
-
     // Loop through items in local storage
 
     for (var i = 0; i < stickiesArray.length; i++) {
-        key = stickiesArray[i]
-        value = localStorage[key]
+        var key = stickiesArray[i]
+        var value = localStorage[key]
         addSticky(value)
     }
 
     // Add items to DOM
 
     function addSticky(value) {
-        stickies = document.querySelector('.stickies')
-        sticky = document.createElement('li')
-        span = document.createElement('span')
+        const stickies = document.querySelector('.stickies')
+        const sticky = document.createElement('li')
+        const span = document.createElement('span')
         sticky.setAttribute('class', key)
         span.innerHTML = value
         sticky.appendChild(span)
@@ -42,14 +40,14 @@
 
     // Create a new item
 
-    button = document.querySelector('.add')
-    button.addEventListener('click', function () {
+    const btn = document.querySelector('.add')
+    btn.addEventListener('click', function () {
         createSticky()
     });
 
     function createSticky() {
         stickiesArray = getStickiesArray()
-        currentDate = new Date()
+        var currentDate = new Date()
         key = 'sticky_' + currentDate.getTime()
         value = document.querySelector('.note').value
         localStorage.setItem(key, value)
@@ -60,8 +58,8 @@
 
     // Clear storage
 
-    clearButton = document.querySelector('.clear')
-    clearButton.addEventListener('click', function() {
+    const clearBtn = document.querySelector('.clear')
+    clearBtn.addEventListener('click', function() {
         clearStorage()
         location.reload() // Reload page
     });
@@ -74,6 +72,7 @@
 
     function deleteSticky(e) {
         key = e.target.className
+        // If you click on the span element check parent elements class name
         if (e.target.tagName.toLowerCase() == 'span') {
             key = e.target.parentNode.className
         }

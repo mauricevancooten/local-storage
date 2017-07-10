@@ -2,12 +2,10 @@
 
 ;(function() { // IIFE
 
-  var stickies, sticky, span, button, value, key, clearButton
-
   // Loop through items in local storage
 
   for (var i = 0; i < localStorage.length; i++) {
-    key = localStorage.key(i)
+    var key = localStorage.key(i)
     if (key.substring(0, 6) == 'sticky') { // test to see if begins with sticky
       var value = localStorage.getItem(key)
       addSticky(value)
@@ -17,9 +15,9 @@
   // Add items to DOM
 
   function addSticky(value) {
-    stickies = document.querySelector('.stickies')
-    sticky = document.createElement('li')
-    span = document.createElement('span')
+    const stickies = document.querySelector('.stickies')
+    const sticky = document.createElement('li')
+    const span = document.createElement('span')
     span.setAttribute('class', 'sticky')
     span.innerHTML = value
     sticky.appendChild(span)
@@ -28,8 +26,8 @@
 
   // Create a new item
 
-  button = document.querySelector('.add')
-  button.addEventListener('click', function() {
+  const btn = document.querySelector('.add')
+  btn.addEventListener('click', function() {
     createSticky()
   })
 
@@ -42,8 +40,8 @@
 
   // Clear storage
 
-  clearButton = document.querySelector('.clear')
-  clearButton.addEventListener('click', function() {
+  const clearBtn = document.querySelector('.clear')
+  clearBtn.addEventListener('click', function() {
     localStorage.clear()
   })
 
