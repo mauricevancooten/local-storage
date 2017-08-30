@@ -22,16 +22,17 @@
     for (var i = 0; i < stickiesArray.length; i++) {
         var key = stickiesArray[i]
         var value = localStorage[key]
+        console.log(key)
         addSticky(value)
     }
 
     // Add items to DOM
 
     function addSticky(value) {
-        const stickies = document.querySelector('.stickies')
+        const stickies = document.getElementById('stickies')
         const sticky = document.createElement('li')
         const span = document.createElement('span')
-        sticky.setAttribute('class', key)
+        sticky.classList.add(key)
         span.innerHTML = value
         sticky.appendChild(span)
         stickies.appendChild(sticky)
@@ -40,16 +41,13 @@
 
     // Create a new item
 
-    const btn = document.querySelector('.add')
-    btn.addEventListener('click', function () {
-        createSticky()
-    });
+    const btn = document.getElementById('add')
+    btn.addEventListener('click', createSticky)
 
     function createSticky() {
-        stickiesArray = getStickiesArray()
         var currentDate = new Date()
         key = 'sticky_' + currentDate.getTime()
-        value = document.querySelector('.note').value
+        value = document.getElementById('note').value
         localStorage.setItem(key, value)
         stickiesArray.push(key)
         localStorage.setItem('stickiesArray', JSON.stringify(stickiesArray))
@@ -58,15 +56,11 @@
 
     // Clear storage
 
-    const clearBtn = document.querySelector('.clear')
-    clearBtn.addEventListener('click', function() {
-        clearStorage()
-        location.reload() // Reload page
-    });
-
-    function clearStorage() {
+    const clearBtn = document.getElementById('clear')
+    clearBtn.addEventListener('click', () => {
         localStorage.clear()
-    }
+        location.reload()
+    })
 
     // Delete sticky item
 
@@ -77,13 +71,12 @@
             key = e.target.parentNode.className
         }
         localStorage.removeItem(key)
-        stickiesArray = getStickiesArray()
         if (stickiesArray) {
-            for (var i = 0; i < stickiesArray.length; i++) {
-                if (key == stickiesArray[i]) {
-                    stickiesArray.splice(i, 1)
+            stickiesArray.map( (sticky) => {
+                if (key == sticky) {
+                    stickiesArray.splice(sticky, 1)
                 }
-            }
+            })
         }
         localStorage.setItem('stickiesArray', JSON.stringify(stickiesArray))
         location.reload()

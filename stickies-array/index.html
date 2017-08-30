@@ -2,18 +2,32 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Stickies</title>
+  <meta charset="UTF-8">
+  <title>Local Storage Stickies Array</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <form>
-        <input type="text" class="note">
-        <button class="add">add sticky</button>
-        <button class="clear">clear</button>
-    </form>
-    <ul class="stickies"></ul>
-    <script src="custom.js"></script>
+  <header>
+    <h1>Local Storage Stickies Array</h1>
+  </header>
+  <div class="wrapper">
+    <div class="container">
+      <input id="note" type="text">
+      <button id="add">add sticky</button>
+      <button id="clear">clear</button>
+
+      <ul id="stickies"></ul>
+    </div>
+    <!-- .container-->
+  </div>
+  <!-- .wrapper-->
+  <footer>
+    <small><a href="https://opensource.org/licenses/MIT">MIT</a></small>
+  </footer>
+  <script src="custom.js"></script>
 </body>
 
 </html>
