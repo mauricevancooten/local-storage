@@ -6,7 +6,7 @@
 
   for (var i = 0; i < localStorage.length; i++) {
     var key = localStorage.key(i)
-    if (key.substring(0, 6) == 'sticky') { // test to see if begins with sticky
+    if (key.substring(0, 6) === 'sticky') { // test to see if begins with sticky
       var value = localStorage.getItem(key)
       addSticky(value)
     }
@@ -15,10 +15,10 @@
   // Add items to DOM
 
   function addSticky(value) {
-    const stickies = document.querySelector('.stickies')
+    const stickies = document.getElementById('stickies')
     const sticky = document.createElement('li')
     const span = document.createElement('span')
-    span.setAttribute('class', 'sticky')
+    span.classList.add('sticky')
     span.innerHTML = value
     sticky.appendChild(span)
     stickies.appendChild(sticky)
@@ -26,13 +26,11 @@
 
   // Create a new item
 
-  const btn = document.querySelector('.add')
-  btn.addEventListener('click', function() {
-    createSticky()
-  })
+  const btn = document.getElementById('add')
+  btn.addEventListener('click', createSticky)
 
   function createSticky() {
-    value = document.querySelector('.note').value
+    value = document.getElementById('note').value
     key = 'sticky_' + localStorage.length
     localStorage.setItem(key, value)
     addSticky(value)
@@ -40,9 +38,10 @@
 
   // Clear storage
 
-  const clearBtn = document.querySelector('.clear')
-  clearBtn.addEventListener('click', function() {
+  const clearBtn = document.getElementById('clear')
+  clearBtn.addEventListener('click', () => {
     localStorage.clear()
+    location.reload()
   })
 
 })()
