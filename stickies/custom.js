@@ -1,19 +1,18 @@
 'use strict'
 
-;(function() { // IIFE
+{ // Scope
 
   // Loop through items in local storage
-
-  for (var i = 0; i < localStorage.length; i++) {
-    var key = localStorage.key(i)
+  let value, key
+  for (let i = 0; i < localStorage.length; i++) {
+    key = localStorage.key(i)
     if (key.substring(0, 6) === 'sticky') { // test to see if begins with sticky
-      var value = localStorage.getItem(key)
+      value = localStorage.getItem(key)
       addSticky(value)
     }
   }
 
   // Add items to DOM
-
   function addSticky(value) {
     const stickies = document.getElementById('stickies')
     const sticky = document.createElement('li')
@@ -25,23 +24,20 @@
   }
 
   // Create a new item
-
-  const btn = document.getElementById('add')
-  btn.addEventListener('click', createSticky)
-
-  function createSticky() {
+  const createSticky = () => {
     value = document.getElementById('note').value
-    key = 'sticky_' + localStorage.length
+    key = `sticky_${localStorage.length}`
     localStorage.setItem(key, value)
     addSticky(value)
   }
+  const btn = document.getElementById('add')
+  btn.addEventListener('click', createSticky)
 
   // Clear storage
-
   const clearBtn = document.getElementById('clear')
   clearBtn.addEventListener('click', () => {
     localStorage.clear()
     location.reload()
   })
 
-})()
+}
